@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amor y Amistad en Atenea - Expresa tu Sentir</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ateneaGold: '#d4af37',
+                        loveRed: '#d90429',
+                        deepRose: '#ef233c',
+                        blushPink: '#fff0f3',
+                        softMagenta: '#800f2f',
+                        midnightWine: '#2b050d',
+                        warmIvory: '#fffcf7'
+                    },
+                    fontFamily: {
+                        handwriting: ['"Caveat"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff0f3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ef233c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #800f2f;
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 252, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .glass-dark {
+            background: rgba(43, 5, 13, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        /* Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 6px rgba(217, 4, 41, 0.4)); }
+            50% { filter: drop-shadow(0 0 16px rgba(217, 4, 41, 0.8)); }
+        }
+
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        .glow-heart {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        /* Canvas Overlay for Particles */
+        #cursor-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .text-break-words {
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blushPink via-warmIvory to-[#fde2e4] text-gray-800 font-sans min-h-screen relative overflow-x-hidden selection:bg-loveRed selection:text-white">
+
+    <!-- Interactive Cursor Canvas -->
+    <canvas id="cursor-canvas"></canvas>
+
+    <!-- Floating Background Decor -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute top-10 left-6 text-loveRed/20 text-6xl animate-float">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="absolute top-1/4 right-10 text-ateneaGold/30 text-5xl animate-float" style="animation-delay: 1.5s;">
+            <i class="fa-solid fa-sparkles"></i>
+        </div>
+        <div class="absolute bottom-20 left-12 text-deepRose/20 text-7xl animate-float" style="animation-delay: 3s;">
+            <i class="fa-solid fa-envelope-open-text"></i>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-warmIvory/90 border-b border-ateneaGold/30 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-loveRed via-deepRose to-ateneaGold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform glow-heart">
+                    <i class="fa-solid fa-crown text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-cinzel text-xl sm:text-2xl font-bold text-midnightWine block leading-none tracking-wide">
+                        Amor y Amistad
+                    </span>
+                    <span class="text-[11px] font-semibold text-loveRed tracking-widest uppercase">En Atenea ✨</span>
+                </div>
+            </a>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <button onclick="openModal('purposeModal')" class="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-midnightWine hover:text-loveRed rounded-full border border-ateneaGold/50 hover:border-loveRed hover:bg-loveRed/10 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-compass text-loveRed"></i>
+                    <span>Propósito</span>
+                </button>
+                <button onclick="openCreateModal('general')" class="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-deepRose to-softMagenta hover:from-softMagenta hover:to-deepRose rounded-full shadow-md hover:shadow-lg transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-feather"></i>
+                    <span class="hidden sm:inline">Ingresa tu</span> Mensaje
+                </button>
+                <button onclick="openCreateModal('special')" class="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-midnightWine bg-gradient-to-r from-ateneaGold via-yellow-200 to-ateneaGold hover:brightness-105 rounded-full shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 border border-ateneaGold">
+                    <i class="fa-solid fa-heart text-loveRed"></i>
+                    <span>Para Alguien Especial</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-12 sm:py-16 px-4 text-center z-10">
+        <div class="max-w-4xl mx-auto space-y-5">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-loveRed/10 text-loveRed text-xs sm:text-sm font-semibold border border-loveRed/30 animate-pulse">
+                <i class="fa-solid fa-gifts"></i>
+                <span>Edición Especial de Amor & Amistad Atenea</span>
+            </div>
+
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-bold text-midnightWine leading-tight">
+                Amor y Amistad en <span class="bg-gradient-to-r from-loveRed via-deepRose to-ateneaGold bg-clip-text text-transparent">Atenea</span>
+            </h1>
+
+            <p class="font-serif italic text-lg sm:text-2xl text-softMagenta/90 max-w-2xl mx-auto leading-relaxed">
+                "Un rincón mágico para transmitir emociones genuinas, dar gracias y celebrar a quienes hacen florecer nuestros días."
+            </p>
+
+            <!-- Quick Jump Navigation Tabs -->
+            <div class="pt-4 flex flex-wrap justify-center gap-3 text-xs sm:text-sm font-medium">
+                <a href="#mensajes-section" class="px-4 py-2 bg-warmIvory rounded-full border border-ateneaGold/40 text-midnightWine hover:bg-ateneaGold/20 transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-loveRed"></i> Muro de Mensajes
+                </a>
+                <a href="#amigo-secreto-section" class="px-4 py-2 bg-warmIvory rounded-full border border-ateneaGold/40 text-midnightWine hover:bg-ateneaGold/20 transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-user-secret text-softMagenta"></i> Votación Amigo Secreto
+                </a>
+                <a href="#deseos-section" class="px-4 py-2 bg-warmIvory rounded-full border border-ateneaGold/40 text-midnightWine hover:bg-ateneaGold/20 transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-ateneaGold"></i> Lista de Deseos de Regalo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 z-10 relative space-y-16">
+
+        <!-- SECTION 1: MURO DE MENSAJES -->
+        <section id="mensajes-section" class="space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-warmIvory/80 p-4 sm:p-6 rounded-3xl border border-ateneaGold/40 backdrop-blur-sm shadow-md">
+                <div>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl text-midnightWine font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-envelope-open-text text-loveRed"></i> Muro de Expresión y Cartas
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-600 font-sans">Encuentra dedicatorias públicas o dirigidas con nombre y apellido.</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <button onclick="filterType('todos')" class="filter-btn active-filter px-4 py-1.5 rounded-full text-xs font-semibold bg-loveRed text-white shadow-sm" data-type="todos">
+                        Todos
+                    </button>
+                    <button onclick="filterType('especial')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-warmIvory text-midnightWine border border-ateneaGold/50 hover:bg-ateneaGold/20" data-type="especial">
+                        ❤️ Para Alguien Especial
+                    </button>
+                    <button onclick="filterType('general')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-warmIvory text-midnightWine border border-ateneaGold/50 hover:bg-ateneaGold/20" data-type="general">
+                        🌟 Mensajes Generales
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Grid -->
+            <div id="messages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Rendered dynamically -->
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: VOTACIÓN AMIGO SECRETO -->
+        <section id="amigo-secreto-section" class="glass-dark text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden border-2 border-ateneaGold">
+            <div class="absolute -right-10 -top-10 text-ateneaGold/10 text-9xl pointer-events-none">
+                <i class="fa-solid fa-user-secret"></i>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-8 relative z-10 text-center">
+                <div class="space-y-2">
+                    <span class="px-4 py-1 rounded-full bg-ateneaGold/20 text-ateneaGold border border-ateneaGold/40 text-xs font-bold uppercase tracking-widest">
+                        Interacción Grupal Atenea
+                    </span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl text-ateneaGold font-bold">
+                        ¿Jugamos a Amigo Secreto? 🎁
+                    </h2>
+                    <p class="text-gray-300 text-sm sm:text-base font-sans max-w-xl mx-auto">
+                        ¡Vota si te gustaría participar en la dinámica de intercambio de regalos para esta temporada de Amor y Amistad!
+                    </p>
+                </div>
+
+                <!-- Poll Options Container -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <button onclick="openVoteModal('si')" class="p-5 rounded-2xl bg-white/10 hover:bg-white/20 border border-ateneaGold/40 transition-all flex flex-col justify-between group relative overflow-hidden">
+                        <div class="flex items-center justify-between w-full mb-3">
+                            <span class="font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-ateneaGold"></i> ¡Sí, me encanta la idea! 🎉
+                            </span>
+                            <span id="vote-si-count" class="font-mono text-xl font-bold text-ateneaGold">0</span>
+                        </div>
+                        <div class="w-full bg-black/40 h-2.5 rounded-full overflow-hidden">
+                            <div id="vote-si-bar" class="bg-gradient-to-r from-ateneaGold to-yellow-300 h-full w-0 transition-all duration-500"></div>
+                        </div>
+                    </button>
+
+                    <button onclick="openVoteModal('no')" class="p-5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all flex flex-col justify-between group relative overflow-hidden">
+                        <div class="flex items-center justify-between w-full mb-3">
+                            <span class="font-bold text-lg text-gray-200 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-xmark text-gray-400"></i> Esta vez prefiero solo mirar
+                            </span>
+                            <span id="vote-no-count" class="font-mono text-xl font-bold text-gray-400">0</span>
+                        </div>
+                        <div class="w-full bg-black/40 h-2.5 rounded-full overflow-hidden">
+                            <div id="vote-no-bar" class="bg-gray-400 h-full w-0 transition-all duration-500"></div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Registered Voters List Display -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left pt-2">
+                    <div class="bg-black/30 p-4 rounded-2xl border border-ateneaGold/30">
+                        <h4 class="text-xs uppercase font-bold text-ateneaGold tracking-wider mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-green-400"></i> Votaron SÍ (<span id="voters-si-count">0</span>):
+                        </h4>
+                        <div id="voters-si-list" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+                            <!-- Voters list rendered dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 p-4 rounded-2xl border border-white/20">
+                        <h4 class="text-xs uppercase font-bold text-gray-400 tracking-wider mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-xmark text-red-400"></i> Votaron NO (<span id="voters-no-count">0</span>):
+                        </h4>
+                        <div id="voters-no-list" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+                            <!-- Voters list rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sign up form for Secret Friend -->
+                <div class="pt-4 border-t border-ateneaGold/30 text-left bg-black/30 p-6 rounded-2xl space-y-4">
+                    <h3 class="font-cinzel text-lg text-ateneaGold font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-user"></i> Inscríbete oficialmente en la lista de Amigo Secreto
+                    </h3>
+                    <form onsubmit="registerSecretFriend(event)" class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="sfName" required placeholder="Tu Nombre o Apodo" class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 border border-ateneaGold/40 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-ateneaGold">
+                        <input type="text" id="sfContact" required placeholder="Celular o Usuario Social" class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 border border-ateneaGold/40 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-ateneaGold">
+                        <button type="submit" class="px-6 py-2.5 bg-gradient-to-r from-ateneaGold to-yellow-500 text-midnightWine font-bold rounded-xl hover:brightness-110 transition-all text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-user-plus"></i> Inscribirme
+                        </button>
+                    </form>
+
+                    <div class="mt-4">
+                        <h4 class="text-xs uppercase font-bold text-ateneaGold tracking-wider mb-2">Inscritos para jugar (<span id="sf-count">0</span>):</h4>
+                        <div id="sf-participants-list" class="flex flex-wrap gap-2 max-h-28 overflow-y-auto pr-2">
+                            <!-- Participant tags rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 3: LISTA DE DESEOS DE REGALO -->
+        <section id="deseos-section" class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-warmIvory/80 p-6 rounded-3xl border border-ateneaGold/40 shadow-md">
+                <div>
+                    <h2 class="font-cinzel text-2xl sm:text-3xl text-midnightWine font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-ateneaGold"></i> ¿Qué quiero de regalo?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-600 font-sans">Registra tus gustos o consulta qué les gustaría a tus compañeros de Atenea.</p>
+                </div>
+                <button onclick="openModal('wishModal')" class="px-5 py-2.5 bg-gradient-to-r from-loveRed to-deepRose text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-gift"></i> Registrar mi Wishlist
+                </button>
+            </div>
+
+            <!-- Wishlist Grid -->
+            <div id="wishlist-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Rendered dynamically -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL 1: PROPÓSITO -->
+    <div id="purposeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnightWine/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 shadow-2xl relative border-2 border-ateneaGold transform scale-95 transition-transform duration-300" id="purposeModalContent">
+            <button onclick="closeModal('purposeModal')" class="absolute top-4 right-4 text-gray-400 hover:text-loveRed w-8 h-8 rounded-full flex items-center justify-center hover:bg-loveRed/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-3 mb-6">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-loveRed to-ateneaGold text-white mx-auto flex items-center justify-center text-2xl shadow-md glow-heart">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h2 class="font-cinzel text-2xl sm:text-3xl text-midnightWine font-bold">Nuestro Objetivo</h2>
+                <div class="h-0.5 w-20 bg-gradient-to-r from-transparent via-ateneaGold to-transparent mx-auto"></div>
+            </div>
+
+            <div class="space-y-4 text-gray-700 font-serif text-base sm:text-lg leading-relaxed text-center sm:text-left">
+                <p>
+                    <span class="font-bold text-loveRed">"Amor y Amistad en Atenea"</span> ha sido diseñado como un punto de encuentro cálido e interactivo.
+                </p>
+                <div class="bg-blushPink p-4 rounded-2xl border border-ateneaGold/40 italic text-midnightWine text-sm sm:text-base">
+                    <i class="fa-solid fa-quote-left text-ateneaGold mr-1"></i>
+                    El objetivo principal de esta página es lograr un espacio de encuentro destinado a transmitir emociones genuinas y expresar un profundo aprecio hacia las personas que nos acompañan día a día.
+                    <i class="fa-solid fa-quote-right text-ateneaGold ml-1"></i>
+                </div>
+                <p class="text-sm text-gray-600 font-sans">
+                    Aprovecha este muro para enviar cartas de admiración, palabras sinceras de gratitud o declararle tu afecto a esa persona especial dentro de la comunidad.
+                </p>
+            </div>
+
+            <div class="mt-8">
+                <button onclick="closeModal('purposeModal'); openCreateModal('special');" class="w-full py-3 bg-gradient-to-r from-loveRed to-softMagenta text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-feather"></i>
+                    <span>Expresar mis sentimientos ahora</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: INGRESAR MENSAJE (GENERAL O ESPECIAL) -->
+    <div id="createModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnightWine/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-xl w-full rounded-3xl p-6 sm:p-8 shadow-2xl relative border-2 border-ateneaGold transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="createModalContent">
+            <button onclick="closeModal('createModal')" class="absolute top-4 right-4 text-gray-400 hover:text-loveRed w-8 h-8 rounded-full flex items-center justify-center hover:bg-loveRed/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-1 mb-6">
+                <span id="modalCategoryBadge" class="text-xs font-bold uppercase tracking-widest text-loveRed bg-loveRed/10 px-3 py-1 rounded-full border border-loveRed/30">
+                    Especial
+                </span>
+                <h2 id="modalTitle" class="font-cinzel text-2xl sm:text-3xl text-midnightWine font-bold pt-2">
+                    Ingresa tu mensaje
+                </h2>
+            </div>
+
+            <form id="msgForm" onsubmit="submitMessage(event)" class="space-y-4 font-sans">
+                <input type="hidden" id="msgType" value="general">
+
+                <!-- Dedicated target field for special message -->
+                <div id="targetPersonContainer" class="bg-ateneaGold/10 p-3.5 rounded-2xl border border-ateneaGold/40 space-y-1">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine" for="targetInput">
+                        ¿Para quién es este mensaje? <span class="text-loveRed">*</span>
+                    </label>
+                    <input type="text" id="targetInput" placeholder="Ej: Para Sofía M., Profe Carlos, Mi mejor amig@..." class="w-full px-4 py-2 rounded-xl border border-ateneaGold/50 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="authorInput">
+                            Tu nombre o Apodo <span class="text-loveRed">*</span>
+                        </label>
+                        <input type="text" id="authorInput" required placeholder="Ej: Tu Admirador, Camila..." class="w-full px-4 py-2 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="titleInput">
+                            Título o Tema <span class="text-loveRed">*</span>
+                        </label>
+                        <input type="text" id="titleInput" required placeholder="Ej: Gracias por tu amistad" class="w-full px-4 py-2 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="contentInput">
+                        El mensaje o dedicatoria <span class="text-loveRed">*</span>
+                    </label>
+                    <textarea id="contentInput" required rows="5" placeholder="Escribe aquí tus palabras sinceras que nacen del alma y el corazón..." class="w-full px-4 py-3 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm font-serif leading-relaxed"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-loveRed via-deepRose to-softMagenta text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Publicar en Atenea</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: REGISTRAR QUE QUIERO DE REGALO -->
+    <div id="wishModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnightWine/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 shadow-2xl relative border-2 border-ateneaGold transform scale-95 transition-transform duration-300" id="wishModalContent">
+            <button onclick="closeModal('wishModal')" class="absolute top-4 right-4 text-gray-400 hover:text-loveRed w-8 h-8 rounded-full flex items-center justify-center hover:bg-loveRed/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-1 mb-6">
+                <div class="w-12 h-12 rounded-full bg-ateneaGold/20 text-ateneaGold mx-auto flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h2 class="font-cinzel text-2xl text-midnightWine font-bold">¿Qué quieres de regalo?</h2>
+                <p class="text-xs text-gray-500 font-sans">Guía a tus amigos o a tu amigo secreto.</p>
+            </div>
+
+            <form onsubmit="submitWish(event)" class="space-y-4 font-sans">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="wishPerson">Tu Nombre / Apodo <span class="text-loveRed">*</span></label>
+                    <input type="text" id="wishPerson" required placeholder="Ej: Andrea Ruiz" class="w-full px-4 py-2 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="wishCategory">Tipo de detalle preferido</label>
+                    <select id="wishCategory" class="w-full px-4 py-2 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                        <option value="Chocolates / Dulces">🍫 Chocolates / Dulces</option>
+                        <option value="Libros / Papelería">📚 Libros / Papelería</option>
+                        <option value="Accesorios / Cuidado Personal">✨ Accesorios / Cuidado</option>
+                        <option value="Detalle Hecho a Mano">🎨 Detalle Creativo / Manualidad</option>
+                        <option value="Sorpréndeme">🎁 Sorpréndeme</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="wishDetails">Detalles o gustos específicos <span class="text-loveRed">*</span></label>
+                    <textarea id="wishDetails" required rows="3" placeholder="Ej: Me encanta el chocolate amargo, los colores pasteles y las plumas bonitas..." class="w-full px-4 py-2.5 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-ateneaGold to-yellow-500 text-midnightWine font-bold rounded-xl shadow-md hover:brightness-110 transition-all text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bookmark"></i> Guardar mi Lista
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: REGALITOS VIRTUALES -->
+    <div id="giftModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnightWine/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border-2 border-ateneaGold transform scale-95 transition-transform duration-300" id="giftModalContent">
+            <button onclick="closeModal('giftModal')" class="absolute top-4 right-4 text-gray-400 hover:text-loveRed w-8 h-8 rounded-full flex items-center justify-center hover:bg-loveRed/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-2 mb-6">
+                <h3 class="font-cinzel text-xl text-midnightWine font-bold">Enviar Regalito Virtual 🎁</h3>
+                <p class="text-xs text-gray-600">Elige un detalle para adjuntar a esta publicación:</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-6" id="virtual-gifts-selection">
+                <button onclick="selectGift('🌹 Ramo de Rosas')" class="p-3 rounded-2xl bg-white border border-ateneaGold/30 hover:border-loveRed hover:bg-blushPink transition-all text-left flex items-center gap-3">
+                    <span class="text-2xl">🌹</span>
+                    <div>
+                        <div class="font-bold text-xs text-midnightWine">Rosas</div>
+                        <div class="text-[10px] text-gray-500">Amor y afecto</div>
+                    </div>
+                </button>
+                <button onclick="selectGift('🍫 Caja de Chocolates')" class="p-3 rounded-2xl bg-white border border-ateneaGold/30 hover:border-loveRed hover:bg-blushPink transition-all text-left flex items-center gap-3">
+                    <span class="text-2xl">🍫</span>
+                    <div>
+                        <div class="font-bold text-xs text-midnightWine">Chocolates</div>
+                        <div class="text-[10px] text-gray-500">Dulzura pura</div>
+                    </div>
+                </button>
+                <button onclick="selectGift('💌 Carta Sellada')" class="p-3 rounded-2xl bg-white border border-ateneaGold/30 hover:border-loveRed hover:bg-blushPink transition-all text-left flex items-center gap-3">
+                    <span class="text-2xl">💌</span>
+                    <div>
+                        <div class="font-bold text-xs text-midnightWine">Carta Secreta</div>
+                        <div class="text-[10px] text-gray-500">Palabras especiales</div>
+                    </div>
+                </button>
+                <button onclick="selectGift('🧸 Abrazo de Oso')" class="p-3 rounded-2xl bg-white border border-ateneaGold/30 hover:border-loveRed hover:bg-blushPink transition-all text-left flex items-center gap-3">
+                    <span class="text-2xl">🧸</span>
+                    <div>
+                        <div class="font-bold text-xs text-midnightWine">Abrazo</div>
+                        <div class="text-[10px] text-gray-500">Cariño sincero</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: REGISTRAR NOMBRE DE VOTO AMIGO SECRETO -->
+    <div id="voteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnightWine/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border-2 border-ateneaGold transform scale-95 transition-transform duration-300" id="voteModalContent">
+            <button onclick="closeModal('voteModal')" class="absolute top-4 right-4 text-gray-400 hover:text-loveRed w-8 h-8 rounded-full flex items-center justify-center hover:bg-loveRed/10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-2 mb-6">
+                <div class="w-12 h-12 rounded-full bg-loveRed/20 text-loveRed mx-auto flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-check-to-slot"></i>
+                </div>
+                <h3 class="font-cinzel text-xl text-midnightWine font-bold">Registra tu voto</h3>
+                <p id="voteModalSubtitle" class="text-xs text-gray-600 font-sans">Escribe tu nombre para guardar tu opción en la encuesta.</p>
+            </div>
+
+            <form onsubmit="submitVote(event)" class="space-y-4 font-sans">
+                <input type="hidden" id="pendingVoteOption" value="si">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-midnightWine mb-1" for="voterNameInput">Tu Nombre o Apodo <span class="text-loveRed">*</span></label>
+                    <input type="text" id="voterNameInput" required placeholder="Ej: Camilo S., María..." class="w-full px-4 py-2.5 rounded-xl border border-ateneaGold/40 bg-white focus:outline-none focus:ring-2 focus:ring-loveRed text-sm">
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-loveRed to-deepRose text-white font-bold rounded-xl shadow-md hover:brightness-110 transition-all text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Confirmar mi Voto
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-midnightWine text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-ateneaGold flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-loveRed flex items-center justify-center text-white text-sm">
+                <i class="fa-solid fa-sparkles" id="toast-icon"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-xs text-ateneaGold" id="toast-title">Notificación</h4>
+                <p class="text-xs text-white/90" id="toast-message">Mensaje de confirmación</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-ateneaGold/30 bg-warmIvory/90 py-10 text-center relative z-10">
+        <div class="max-w-4xl mx-auto px-4 space-y-4">
+            <div class="flex justify-center items-center gap-3 text-loveRed text-xl">
+                <i class="fa-solid fa-sparkles text-ateneaGold"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-crown text-ateneaGold"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-sparkles text-ateneaGold"></i>
+            </div>
+            <p class="font-cinzel text-xl text-midnightWine font-bold">Amor y Amistad en Atenea</p>
+            <p class="font-serif italic text-xs sm:text-sm text-gray-600 max-w-md mx-auto">
+                Espacio de libre expresión creado para conectar almas, agradecer coincidencias e inspirar sonrisas.
+            </p>
+            <p class="text-[11px] text-gray-400 font-sans pt-2">
+                © 2026 Atenea - Celebración de Amor y Amistad.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC CONECTADO A NETLIFY FUNCTIONS + BLOBS -->
+    <script>
+        // CLIENTE DE API HACIA NETLIFY FUNCTIONS
+        const API = "/.netlify/functions";
+
+        async function apiGet(resource) {
+            const res = await fetch(`${API}/${resource}`);
+            if (!res.ok) throw new Error(`Error al leer ${resource}`);
+            return res.json();
+        }
+
+        async function apiPost(resource, payload) {
+            const res = await fetch(`${API}/${resource}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.error || `Error al escribir en ${resource}`);
+            }
+            return res.json();
+        }
+
+        // ESTADOS LOCALES Y NAVEGACIÓN
+        let currentMessages = [];
+        let currentWishes = [];
+        let currentVotes = { si: [], no: [] };
+        let currentSFList = [];
+        let activeFilter = 'todos';
+        let activeTargetMessageId = null;
+
+        // CARGA DE DATOS DESDE NETLIFY FUNCTIONS + SONDEO PERIÓDICO
+        async function loadMessages() {
+            try {
+                currentMessages = await apiGet("messages");
+                renderMessages();
+            } catch (err) { console.error(err); }
+        }
+
+        async function loadWishes() {
+            try {
+                currentWishes = await apiGet("wishes");
+                renderWishes();
+            } catch (err) { console.error(err); }
+        }
+
+        async function loadPoll() {
+            try {
+                currentVotes = await apiGet("poll");
+                renderSecretFriend();
+            } catch (err) { console.error(err); }
+        }
+
+        async function loadSecretFriends() {
+            try {
+                currentSFList = await apiGet("secret-friends");
+                renderSecretFriend();
+            } catch (err) { console.error(err); }
+        }
+
+        function loadAllData() {
+            loadMessages();
+            loadWishes();
+            loadPoll();
+            loadSecretFriends();
+        }
+
+        function initRealtimeListeners() {
+            loadAllData();
+            // No hay push en tiempo real sin servidor persistente, así que
+            // refrescamos cada 6 segundos para que todos vean cambios de otros.
+            setInterval(loadAllData, 6000);
+        }
+
+        // RENDER MESSAGES
+        function renderMessages() {
+            const grid = document.getElementById('messages-grid');
+
+            const filtered = currentMessages.filter(m => {
+                if (activeFilter === 'todos') return true;
+                return m.type === activeFilter;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 space-y-3 glass-card rounded-3xl p-6">
+                        <div class="text-4xl text-ateneaGold"><i class="fa-solid fa-heart-crack"></i></div>
+                        <h3 class="font-cinzel text-xl text-midnightWine font-bold">Aún no hay mensajes en este muro</h3>
+                        <p class="text-xs text-gray-500">Sé la primera persona en compartir una dedicatoria especial o unas palabras de cariño.</p>
+                        <button onclick="openCreateModal('special')" class="px-5 py-2 bg-loveRed text-white text-xs font-bold rounded-full hover:bg-softMagenta transition-colors">
+                            Escribir el primer mensaje
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(m => `
+                <article class="glass-card rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative border border-ateneaGold/30 hover:border-loveRed/50 transform hover:-translate-y-1">
+                    <div>
+                        <!-- Header Badge & Target -->
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${m.type === 'especial' ? 'bg-loveRed/10 text-loveRed border border-loveRed/30' : 'bg-ateneaGold/20 text-midnightWine border border-ateneaGold/40'}">
+                                ${m.type === 'especial' ? '❤️ Especial' : '🌟 General'}
+                            </span>
+                            <span class="text-[11px] text-gray-400 font-medium">
+                                <i class="fa-regular fa-clock mr-1"></i>${m.date}
+                            </span>
+                        </div>
+
+                        ${m.target ? `
+                            <div class="bg-blushPink p-2.5 rounded-xl border border-loveRed/20 mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-heart-circle-check text-loveRed text-sm"></i>
+                                <span class="text-xs font-bold text-midnightWine">${m.target}</span>
+                            </div>
+                        ` : ''}
+
+                        <!-- Title & Author -->
+                        <h3 class="font-cinzel text-xl text-midnightWine font-bold mb-1 leading-tight">
+                            ${m.title}
+                        </h3>
+                        <p class="text-xs font-bold text-loveRed/80 mb-3 italic">
+                            De: ${m.author}
+                        </p>
+
+                        <!-- Content -->
+                        <p class="font-serif text-gray-700 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                            ${m.content}
+                        </p>
+
+                        <!-- Virtual Gifts Display -->
+                        ${m.gifts && m.gifts.length > 0 ? `
+                            <div class="mb-4 pt-2 border-t border-ateneaGold/20 flex flex-wrap gap-1.5">
+                                ${m.gifts.map(g => `<span class="px-2.5 py-1 bg-white/80 rounded-full text-[11px] font-bold text-midnightWine border border-ateneaGold/30 shadow-xs">${g}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- Actions Bottom -->
+                    <div class="pt-4 border-t border-ateneaGold/20 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <button onclick="toggleLike('${m.id}', ${m.likes || 0})" class="px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 bg-blushPink text-midnightWine hover:bg-loveRed/20">
+                                    <i class="fa-solid fa-heart text-loveRed"></i>
+                                    <span>${m.likes || 0}</span>
+                                </button>
+
+                                <button onclick="openGiftModal('${m.id}')" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-ateneaGold/20 text-midnightWine hover:bg-ateneaGold/40 transition-all flex items-center gap-1">
+                                    <i class="fa-solid fa-gift text-loveRed"></i> Regalito
+                                </button>
+                            </div>
+
+                            <button onclick="toggleCommentsSection('${m.id}')" class="text-xs font-bold text-gray-500 hover:text-midnightWine flex items-center gap-1">
+                                <i class="fa-regular fa-comment"></i>
+                                <span>${m.comments ? m.comments.length : 0}</span>
+                            </button>
+                        </div>
+
+                        <!-- Comments Drawer -->
+                        <div id="comments-box-${m.id}" class="hidden space-y-2 pt-2 text-xs">
+                            <div class="max-h-32 overflow-y-auto space-y-1.5 pr-1" id="comments-list-${m.id}">
+                                ${m.comments && m.comments.length > 0 ? m.comments.map(c => `
+                                    <div class="bg-white/70 p-2 rounded-xl border border-ateneaGold/20">
+                                        <span class="font-bold text-loveRed">${c.author}:</span>
+                                        <span class="text-gray-700">${c.text}</span>
+                                    </div>
+                                `).join('') : '<p class="text-[11px] text-gray-400 italic">No hay respuestas aún. ¡Sé el primero!</p>'}
+                            </div>
+
+                            <form onsubmit="addComment(event, '${m.id}')" class="flex gap-1.5 pt-1">
+                                <input type="text" placeholder="Tu nombre" required class="w-1/3 px-2 py-1 rounded-lg border border-ateneaGold/30 text-[11px] bg-white">
+                                <input type="text" placeholder="Comentar..." required class="flex-1 px-2 py-1 rounded-lg border border-ateneaGold/30 text-[11px] bg-white">
+                                <button type="submit" class="px-2.5 py-1 bg-midnightWine text-white text-[11px] font-bold rounded-lg hover:bg-loveRed">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // RENDER WISHLIST
+        function renderWishes() {
+            const grid = document.getElementById('wishlist-grid');
+
+            if (currentWishes.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-8 glass-card rounded-2xl p-4">
+                        <p class="text-xs text-gray-500">Nadie ha registrado sus gustos aún. ¡Sé la primera persona en subir tu wishlist!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = currentWishes.map(w => `
+                <div class="glass-card p-4 rounded-2xl border border-ateneaGold/30 space-y-2 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-midnightWine">${w.name}</span>
+                        <span class="text-xs text-loveRed"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    </div>
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-ateneaGold/20 text-midnightWine">
+                        ${w.category}
+                    </span>
+                    <p class="text-xs text-gray-600 font-serif italic pt-1">
+                        "${w.details}"
+                    </p>
+                </div>
+            `).join('');
+        }
+
+        // RENDER SECRET FRIEND POLL & VOTERS
+        function renderSecretFriend() {
+            const siVotes = currentVotes.si ? currentVotes.si : [];
+            const noVotes = currentVotes.no ? currentVotes.no : [];
+
+            const total = siVotes.length + noVotes.length;
+            const siPercent = total > 0 ? Math.round((siVotes.length / total) * 100) : 0;
+            const noPercent = total > 0 ? Math.round((noVotes.length / total) * 100) : 0;
+
+            document.getElementById('vote-si-count').innerText = `${siVotes.length} (${siPercent}%)`;
+            document.getElementById('vote-no-count').innerText = `${noVotes.length} (${noPercent}%)`;
+            document.getElementById('vote-si-bar').style.width = `${siPercent}%`;
+            document.getElementById('vote-no-bar').style.width = `${noPercent}%`;
+
+            // Render Voters Lists
+            document.getElementById('voters-si-count').innerText = siVotes.length;
+            const votersSiContainer = document.getElementById('voters-si-list');
+            votersSiContainer.innerHTML = siVotes.length > 0 ? siVotes.map(v => `
+                <span class="px-2.5 py-0.5 rounded-full bg-green-500/20 text-green-300 text-[11px] font-semibold border border-green-500/40">
+                    ${v}
+                </span>
+            `).join('') : '<span class="text-[11px] text-gray-500 italic">Sin votos aún</span>';
+
+            document.getElementById('voters-no-count').innerText = noVotes.length;
+            const votersNoContainer = document.getElementById('voters-no-list');
+            votersNoContainer.innerHTML = noVotes.length > 0 ? noVotes.map(v => `
+                <span class="px-2.5 py-0.5 rounded-full bg-gray-500/20 text-gray-300 text-[11px] font-semibold border border-gray-500/40">
+                    ${v}
+                </span>
+            `).join('') : '<span class="text-[11px] text-gray-500 italic">Sin votos aún</span>';
+
+            // Secret friend participants
+            document.getElementById('sf-count').innerText = currentSFList.length;
+            const listContainer = document.getElementById('sf-participants-list');
+
+            listContainer.innerHTML = currentSFList.length > 0 ? currentSFList.map(p => `
+                <span class="px-3 py-1 rounded-full bg-white/10 text-ateneaGold text-xs font-semibold border border-ateneaGold/30 flex items-center gap-1.5">
+                    <i class="fa-solid fa-user text-[10px]"></i> ${p.name}
+                </span>
+            `).join('') : '<span class="text-xs text-gray-400 italic">Nadie se ha inscrito aún en el Amigo Secreto.</span>';
+        }
+
+        // INTERACCIONES CONTRA NETLIFY FUNCTIONS
+        async function toggleLike(id, currentLikes) {
+            try {
+                await apiPost("messages", { action: "like", id });
+                await loadMessages();
+                showToast("¡Amor enviado!", "Le diste amor a esta dedicatoria", "fa-heart");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function toggleCommentsSection(id) {
+            const box = document.getElementById(`comments-box-${id}`);
+            box.classList.toggle('hidden');
+        }
+
+        async function addComment(e, id) {
+            e.preventDefault();
+            const form = e.target;
+            const author = form.elements[0].value.trim();
+            const text = form.elements[1].value.trim();
+
+            if (!author || !text) return;
+
+            try {
+                await apiPost("messages", { action: "comment", id, author, text });
+                await loadMessages();
+                form.reset();
+                showToast("Comentario agregado", "Tu respuesta ha sido publicada.", "fa-comment");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function openVoteModal(option) {
+            document.getElementById('pendingVoteOption').value = option;
+            const subtitle = document.getElementById('voteModalSubtitle');
+            if (option === 'si') {
+                subtitle.innerText = "Registra tu nombre para confirmar que SÍ quieres jugar Amigo Secreto 🎉";
+            } else {
+                subtitle.innerText = "Registra tu nombre para confirmar tu voto.";
+            }
+            openModal('voteModal');
+        }
+
+        async function submitVote(e) {
+            e.preventDefault();
+            const name = document.getElementById('voterNameInput').value.trim();
+            const option = document.getElementById('pendingVoteOption').value;
+
+            if (!name) return;
+
+            try {
+                // La función se encarga de quitar el nombre de la otra opción
+                // si la persona ya había votado distinto antes.
+                await apiPost("poll", { name, option });
+                await loadPoll();
+
+                closeModal('voteModal');
+                document.getElementById('voterNameInput').value = '';
+                showToast("¡Voto guardado!", `Gracias ${name}, tu respuesta ha sido registrada.`, "fa-check");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function registerSecretFriend(e) {
+            e.preventDefault();
+            const name = document.getElementById('sfName').value.trim();
+            const contact = document.getElementById('sfContact').value.trim();
+
+            if (!name || !contact) return;
+
+            try {
+                await apiPost("secret-friends", { name, contact });
+                await loadSecretFriends();
+
+                document.getElementById('sfName').value = '';
+                document.getElementById('sfContact').value = '';
+
+                showToast("¡Te has inscrito!", "Ya estás en la lista de Amigo Secreto Atenea.", "fa-user-check");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function submitWish(e) {
+            e.preventDefault();
+            const name = document.getElementById('wishPerson').value.trim();
+            const category = document.getElementById('wishCategory').value;
+            const details = document.getElementById('wishDetails').value.trim();
+
+            if (!name || !details) return;
+
+            try {
+                await apiPost("wishes", { name, category, details });
+                await loadWishes();
+
+                closeModal('wishModal');
+                showToast("¡Wishlist guardada!", "Tus gustos ya están visibles para tus amigos.", "fa-wand-magic-sparkles");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function openGiftModal(id) {
+            activeTargetMessageId = id;
+            openModal('giftModal');
+        }
+
+        async function selectGift(giftName) {
+            if (!activeTargetMessageId) return;
+
+            try {
+                await apiPost("messages", { action: "gift", id: activeTargetMessageId, gift: giftName });
+                await loadMessages();
+
+                closeModal('giftModal');
+                showToast("¡Regalito entregado!", `Has enviado ${giftName} a esta publicación.`, "fa-gift");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function filterType(type) {
+            activeFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.type === type) {
+                    btn.classList.remove('bg-warmIvory', 'text-midnightWine', 'border', 'border-ateneaGold/50');
+                    btn.classList.add('bg-loveRed', 'text-white', 'shadow-sm');
+                } else {
+                    btn.classList.remove('bg-loveRed', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-warmIvory', 'text-midnightWine', 'border', 'border-ateneaGold/50');
+                }
+            });
+            renderMessages();
+        }
+
+        function openCreateModal(mode) {
+            const targetContainer = document.getElementById('targetPersonContainer');
+            const typeInput = document.getElementById('msgType');
+            const title = document.getElementById('modalTitle');
+            const badge = document.getElementById('modalCategoryBadge');
+
+            typeInput.value = mode;
+
+            if (mode === 'special') {
+                targetContainer.classList.remove('hidden');
+                document.getElementById('targetInput').required = true;
+                title.innerText = "Ingresa tu mensaje para esa persona especial";
+                badge.innerText = "Para Alguien Especial ❤️";
+            } else {
+                targetContainer.classList.add('hidden');
+                document.getElementById('targetInput').required = false;
+                title.innerText = "Ingresa tu mensaje general";
+                badge.innerText = "Mensaje General 🌟";
+            }
+
+            openModal('createModal');
+        }
+
+        async function submitMessage(e) {
+            e.preventDefault();
+            const type = document.getElementById('msgType').value;
+            const target = type === 'special' ? document.getElementById('targetInput').value.trim() : '';
+            const author = document.getElementById('authorInput').value.trim();
+            const title = document.getElementById('titleInput').value.trim();
+            const content = document.getElementById('contentInput').value.trim();
+
+            if (!author || !title || !content) return;
+
+            try {
+                await apiPost("messages", { action: "add", data: { type, target, author, title, content } });
+                await loadMessages();
+
+                document.getElementById('msgForm').reset();
+                closeModal('createModal');
+                showToast("¡Publicación realizada!", "Tu mensaje ya luce en el muro de Atenea.", "fa-feather");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // MODAL CONTROLLERS
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            const content = document.getElementById(id + 'Content');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+            if (content) {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            const content = document.getElementById(id + 'Content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            if (content) {
+                content.classList.add('scale-95');
+                content.classList.remove('scale-100');
+            }
+        }
+
+        function showToast(title, message, iconClass = "fa-heart") {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-message').innerText = message;
+            document.getElementById('toast-icon').className = `fa-solid ${iconClass}`;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+
+        // CURSOR CANVAS PARTICLES INTERACTION
+        const canvas = document.getElementById('cursor-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = (Math.random() - 0.5) * 2.5;
+                this.speedY = (Math.random() - 0.5) * 2.5 - 1;
+                this.color = ['#d90429', '#ef233c', '#d4af37', '#ffb3c1'][Math.floor(Math.random() * 4)];
+                this.life = 1;
+                this.decay = Math.random() * 0.03 + 0.015;
+                this.isHeart = Math.random() > 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.decay;
+                if (this.size > 0.2) this.size -= 0.04;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fillStyle = this.color;
+
+                if (this.isHeart) {
+                    ctx.beginPath();
+                    const topCurveHeight = this.size * 0.3;
+                    ctx.moveTo(this.x, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+                    ctx.bezierCurveTo(this.x, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight, this.x + this.size / 2, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0, this.size), 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function handlePointerMove(e) {
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            if (x && y) {
+                for (let i = 0; i < 2; i++) {
+                    particles.push(new Particle(x, y));
+                }
+            }
+        }
+
+        window.addEventListener('mousemove', handlePointerMove);
+        window.addEventListener('touchmove', handlePointerMove);
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].life <= 0 || particles[i].size <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.onload = function() {
+            initRealtimeListeners();
+            animateParticles();
+        };
+    </script>
+</body>
+</html>

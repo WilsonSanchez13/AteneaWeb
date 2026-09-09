@@ -1,0 +1,9 @@
+{
+  "name": "atenea-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Amor y Amistad en Atenea - muro de mensajes, votación de amigo secreto y wishlist",
+  "dependencies": {
+    "@netlify/blobs": "^11.0.1"
+  }
+}
