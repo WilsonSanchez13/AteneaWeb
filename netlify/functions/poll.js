@@ -4,6 +4,7 @@ const STORE_NAME = "atenea-data";
 const KEY = "poll";
 
 exports.handler = async (event) => {
+    connectLambda(event);
   const store = getStore(STORE_NAME);
 
   if (event.httpMethod === "GET") {
